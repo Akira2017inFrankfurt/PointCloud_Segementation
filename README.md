@@ -22,7 +22,8 @@ And the **scheme** should include 4 main parts:
 #### 4 - Others
 
 from (Deep Learning on Point Clouds and Its Application: A Survey)
+[More details here](https://github.com/Akira2017inFrankfurt/PointCloud_Segementation/tree/master/Papers/0-Introduction)
 
 ## Videos include:
-#### Summary
+#### [Summary](https://github.com/Akira2017inFrankfurt/PointCloud_Segementation/blob/master/Videos/Summary.md)
 #### Notes from these lessons
