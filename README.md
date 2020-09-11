@@ -13,12 +13,12 @@ And the scheme should include 4 main parts:
 4. Try to test these thoughts and make progress.
 
 
-###Papers include:
+## Papers include:
 
-0 - Introduction
-1 - Pointnets
-2 - CNNs
-3 - Autoencoder based deep learning
-4 - Others
+#### 0 - Introduction
+#### 1 - Pointnets
+#### 2 - CNNs
+#### 3 - Autoencoder based deep learning
+#### 4 - Others
 
 from (Deep Learning on Point Clouds and Its Application: A Survey)
