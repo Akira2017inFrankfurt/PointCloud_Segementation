@@ -25,5 +25,11 @@ from (Deep Learning on Point Clouds and Its Application: A Survey)
 [More details here](https://github.com/Akira2017inFrankfurt/PointCloud_Segementation/tree/master/Papers/0-Introduction)
 
 ## Videos include:
+
 #### [Resource List](https://github.com/Akira2017inFrankfurt/PointCloud_Segementation/blob/master/Videos/Summary.md)
 #### Notes from these lessons
+
+
+## Appendix
+
+[Future Markdown syntax of Github](https://guides.github.com/features/mastering-markdown/)
