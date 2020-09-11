@@ -22,3 +22,7 @@ And the scheme should include 4 main parts:
 #### 4 - Others
 
 from (Deep Learning on Point Clouds and Its Application: A Survey)
+
+## Videos include:
+#### Summary
+#### Notes from these lessons
