@@ -80,13 +80,13 @@ curl: (60) SSL certificate problem: certificate has expired
 More details here: https://curl.haxx.se/docs/sslcerts.html
 
 接着是解决这个问题
-
-（这个还是和老婆打电话吐槽的时候想起来的，自己说着说着就明白了）
 但是后面发现 其实是下载模型的服务器的问题
-我就直接下载到桌面上了
+我就直接下载到本地了
+举例，其中一个包的名字是： modelnet40_normal_resampled.zip
+其实这个问题只是下载的问题 和模型本身的问题无关
 
 
-但是今天想要在pycharm中安装jupyter notebook
+要在pycharm中安装jupyter notebook
 直接使用pip3的时候 出现提示信息错误：
 ERROR: After October 2020 you may experience errors when installing or updating packages.
  This is because pip will change the way that it resolves dependency conflicts.
@@ -99,7 +99,7 @@ nbclient 0.5.0 requires jupyter-client>=6.1.5, but you'll have jupyter-client 5.
 
 不行，并没有直接在pycharm显示的库中找到对应的jupyter-client
 
-怀着侥幸的心理测试一下吧
+怀着侥幸的心理测试一下
 看看torch是否安装成功了。
 
 在pycharm的命令行中打开笔记本： 顺利进入
@@ -112,9 +112,10 @@ nbclient 0.5.0 requires jupyter-client>=6.1.5, but you'll have jupyter-client 5.
 
 证明pytorch安装成功。
 
-附录： 中端中的安装过程：
 
-<pre>(base) <font color="#8AE234"><b>akira@Akira</b></font>:<font color="#729FCF"><b>~</b></font>$ conda create -n pytorch python=3.7
+附录： 终端中的安装过程：
+
+$ conda create -n pytorch python=3.7
 Collecting package metadata (current_repodata.json): done
 Solving environment: done
 
