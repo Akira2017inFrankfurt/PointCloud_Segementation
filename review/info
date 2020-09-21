@@ -1,0 +1,9 @@
+Use jupyter notebook to review the basic of Pytorch.
+
+Setup information:
+
+Ubuntu18.04
+Anaconda
+Python=3.7.9
+torch=1.5
+GPU=Nividia RTX 2070 super
