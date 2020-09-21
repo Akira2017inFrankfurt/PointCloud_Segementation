@@ -1,0 +1,275 @@
+Pytorch 本地安装
+
+参考资源：
+
+1： https://www.jianshu.com/p/c10f347422d7（安装步骤）
+2： https://github.com/erikwijmans/Pointnet2_PyTorch/blob/master/README.rst（Pointet++实现要求）
+3： https://blog.csdn.net/qq_40263477/article/details/106577790
+
+具体信息：
+Ubuntu18.04
+Anaconda
+Python=3.7.9
+torch=1.5
+(但是直接安装torchvision的时候
+重新安装了torch1.6
+所以 卸载torch1.6 和 torchvision)
+参考文章3， 安装torchvision=0.6
+
+从文章1中下载源码文件，并解压：
+~/下载/Pointnet2_PyTorch-master$
+
+接着使用pycharm打开
+但是我还没有找到刚刚创建的pytorch环境的解释器
+地址：  /home/akira/anaconda3/envs/pytorch
+然后在bin文件里面找到python3.7
+选中之后发现可以正常查看package
+而且torch显示为1.5.0
+torchvision - 0.6.0
+
+接着继续按照文章1 安装需要的依赖
+在pycharm中使用命令
+pip3 install -r requirements.txt
+
+显示结果：
+Successfully built lmdb pytorch-lightning pointnet2-ops PyYAML
+Installing collected packages: msgpack, msgpack-numpy, lmdb, h5py, PyYAML, omegaconf, hydra-core, tqdm, zipp, importlib-metadata, markdown, werkzeug, oauthlib, urllib3, idna, chardet, requests, requests-oauthlib, pyasn1, pyasn1-modules, cachetools, rsa, google-auth, google-auth-oauthlib, tensorboard-plugin-wit, protobuf, absl-py, grpcio, tensorboard, pytorch-lightning, pointnet2-ops
+Successfully installed PyYAML-5.3.1 absl-py-0.10.0 cachetools-4.1.1 chardet-3.0.4 google-auth-1.21.2 google-auth-oauthlib-0.4.1 grpcio-1.32.0 h5py-2.10.0 hydra-core-0.11.3 idna-2.10 importlib-metadata-1.7.0 lmdb-1.0.0 markdown-3.2.2 msgpack-1.0.0 msgpack-numpy-0.4.7 oauthlib-3.1.0 omegaconf-1.4.1 pointnet2-ops-3.0.0 protobuf-3.13.0 pyasn1-0.4.8 pyasn1-modules-0.2.8 pytorch-lightning-0.7.1 requests-2.24.0 requests-oauthlib-1.3.0 rsa-4.6 tensorboard-2.3.0 tensorboard-plugin-wit-1.7.0 tqdm-4.49.0 urllib3-1.25.10 werkzeug-1.0.1 zipp-3.1.0
+
+执行命令：
+pip install -e . （注意后面的 点）
+
+(pytorch) akira@Akira:~/下载/Pointnet2_PyTorch-master$ python
+python3.6.9：未找到命令
+(pytorch) akira@Akira:~/下载/Pointnet2_PyTorch-master$ python3
+Python 3.7.9 (default, Aug 31 2020, 12:42:55)
+
+注意 不指明python3
+或者pip3的话 可能会报错
+现在重新使用pip3 install -e .
+来实现上面的命令
+
+Installing collected packages: pointnet2
+  Attempting uninstall: pointnet2
+    Found existing installation: pointnet2 3.0.0
+    Uninstalling pointnet2-3.0.0:
+      Successfully uninstalled pointnet2-3.0.0
+  Running setup.py develop for pointnet2
+Successfully installed pointnet2
+
+结果显示 会先将之前的卸载 然后加载新的进来
+
+再次实验
+python3 pointnet2/train.py task=cls model=msg
+依旧报错：
+FileNotFoundError: [Errno 2] No such file or directory: 'curl': 'curl'
+
+查看解决办法 准备尝试命令
+sudo apt-get install curl
+sudo apt install libcurl4-openssl-dev libssl-dev
+
+接着运行命令之后出现了一些转机：
+
+% Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                Dload  Upload   Total   Spent    Left  Speed
+ 0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+
+
+但是马上报错：
+curl: (60) SSL certificate problem: certificate has expired
+More details here: https://curl.haxx.se/docs/sslcerts.html
+
+接着是解决这个问题
+
+（这个还是和老婆打电话吐槽的时候想起来的，自己说着说着就明白了）
+但是后面发现 其实是下载模型的服务器的问题
+我就直接下载到桌面上了
+
+
+但是今天想要在pycharm中安装jupyter notebook
+直接使用pip3的时候 出现提示信息错误：
+ERROR: After October 2020 you may experience errors when installing or updating packages.
+ This is because pip will change the way that it resolves dependency conflicts.
+We recommend you use --use-feature=2020-resolver to test your packages with the new resolver before it becomes the default.
+
+nbclient 0.5.0 requires jupyter-client>=6.1.5, but you'll have jupyter-client 5.3.4 which is incompatible.
+
+但是这个很恶心的是 nbclient就直接是在安装jupyter 的步骤中自动添加的
+所以现在看一下 能不能在pycharm中升级jupyter-client来解决 不然的话 可能会报错
+
+不行，并没有直接在pycharm显示的库中找到对应的jupyter-client
+
+怀着侥幸的心理测试一下吧
+看看torch是否安装成功了。
+
+在pycharm的命令行中打开笔记本： 顺利进入
+建立新文件夹：my_test
+新建脚本文件：test_torch_setup
+导入torch模块，打印版本信息，打印cuda信息
+利用torch进行计算
+
+全部成功。
+
+证明pytorch安装成功。
+
+附录： 中端中的安装过程：
+
+<pre>(base) <font color="#8AE234"><b>akira@Akira</b></font>:<font color="#729FCF"><b>~</b></font>$ conda create -n pytorch python=3.7
+Collecting package metadata (current_repodata.json): done
+Solving environment: done
+
+
+==&gt; WARNING: A newer version of conda exists. &lt;==
+  current version: 4.8.3
+  latest version: 4.8.4
+
+Please update conda by running
+
+    $ conda update -n base -c defaults conda
+
+
+
+## Package Plan ##
+
+  environment location: /home/akira/anaconda3/envs/pytorch
+
+  added / updated specs:
+    - python=3.7
+
+
+The following packages will be downloaded:
+
+    package                    |            build
+    ---------------------------|-----------------
+    certifi-2020.6.20          |           py37_0         156 KB
+    pip-20.2.2                 |           py37_0         1.8 MB
+    python-3.7.9               |       h7579374_0        45.3 MB
+    setuptools-49.6.0          |           py37_0         754 KB
+    ------------------------------------------------------------
+                                           Total:        48.0 MB
+
+The following NEW packages will be INSTALLED:
+
+  _libgcc_mutex      pkgs/main/linux-64::_libgcc_mutex-0.1-main
+  ca-certificates    pkgs/main/linux-64::ca-certificates-2020.7.22-0
+  certifi            pkgs/main/linux-64::certifi-2020.6.20-py37_0
+  ld_impl_linux-64   pkgs/main/linux-64::ld_impl_linux-64-2.33.1-h53a641e_7
+  libedit            pkgs/main/linux-64::libedit-3.1.20191231-h14c3975_1
+  libffi             pkgs/main/linux-64::libffi-3.3-he6710b0_2
+  libgcc-ng          pkgs/main/linux-64::libgcc-ng-9.1.0-hdf63c60_0
+  libstdcxx-ng       pkgs/main/linux-64::libstdcxx-ng-9.1.0-hdf63c60_0
+  ncurses            pkgs/main/linux-64::ncurses-6.2-he6710b0_1
+  openssl            pkgs/main/linux-64::openssl-1.1.1g-h7b6447c_0
+  pip                pkgs/main/linux-64::pip-20.2.2-py37_0
+  python             pkgs/main/linux-64::python-3.7.9-h7579374_0
+  readline           pkgs/main/linux-64::readline-8.0-h7b6447c_0
+  setuptools         pkgs/main/linux-64::setuptools-49.6.0-py37_0
+  sqlite             pkgs/main/linux-64::sqlite-3.33.0-h62c20be_0
+  tk                 pkgs/main/linux-64::tk-8.6.10-hbc83047_0
+  wheel              pkgs/main/noarch::wheel-0.35.1-py_0
+  xz                 pkgs/main/linux-64::xz-5.2.5-h7b6447c_0
+  zlib               pkgs/main/linux-64::zlib-1.2.11-h7b6447c_3
+
+
+Proceed ([y]/n)? y
+
+
+Downloading and Extracting Packages
+python-3.7.9         | 45.3 MB   | ##################################### | 100%
+pip-20.2.2           | 1.8 MB    | ##################################### | 100%
+setuptools-49.6.0    | 754 KB    | ##################################### | 100%
+certifi-2020.6.20    | 156 KB    | ##################################### | 100%
+Preparing transaction: done
+Verifying transaction: done
+Executing transaction: done
+#
+# To activate this environment, use
+#
+#     $ conda activate pytorch
+#
+# To deactivate an active environment, use
+#
+#     $ conda deactivate
+
+(base) <font color="#8AE234"><b>akira@Akira</b></font>:<font color="#729FCF"><b>~</b></font>$ conda activate pytorch
+(pytorch) <font color="#8AE234"><b>akira@Akira</b></font>:<font color="#729FCF"><b>~</b></font>$ pip3 install torch==1.5
+Collecting torch==1.5
+<font color="#C4A000">  WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by &apos;ReadTimeoutError(&quot;HTTPSConnectionPool(host=&apos;files.pythonhosted.org&apos;, port=443): Read timed out. (read timeout=15)&quot;)&apos;: /packages/76/58/668ffb25215b3f8231a550a227be7f905f514859c70a65ca59d28f9b7f60/torch-1.5.0-cp37-cp37m-manylinux1_x86_64.whl</font>
+  Downloading torch-1.5.0-cp37-cp37m-manylinux1_x86_64.whl (752.0 MB)
+     |████████████████████████████████| 752.0 MB 18 kB/s
+Collecting future
+  Using cached future-0.18.2.tar.gz (829 kB)
+Collecting numpy
+  Downloading numpy-1.19.2-cp37-cp37m-manylinux2010_x86_64.whl (14.5 MB)
+     |████████████████████████████████| 14.5 MB 2.4 MB/s
+Building wheels for collected packages: future
+  Building wheel for future (setup.py) ... done
+  Created wheel for future: filename=future-0.18.2-py3-none-any.whl size=491059 sha256=9ef998d921e8b54d04d9727fcf39f73d38e0bc56ae89e229999750848dda036a
+  Stored in directory: /home/akira/.cache/pip/wheels/56/b0/fe/4410d17b32f1f0c3cf54cdfb2bc04d7b4b8f4ae377e2229ba0
+Successfully built future
+Installing collected packages: future, numpy, torch
+Successfully installed future-0.18.2 numpy-1.19.2 torch-1.5.0
+(pytorch) <font color="#8AE234"><b>akira@Akira</b></font>:<font color="#729FCF"><b>~</b></font>$ pip3 install torchversion
+<font color="#CC0000">ERROR: Could not find a version that satisfies the requirement torchversion (from versions: none)</font>
+<font color="#CC0000">ERROR: No matching distribution found for torchversion</font>
+(pytorch) <font color="#8AE234"><b>akira@Akira</b></font>:<font color="#729FCF"><b>~</b></font>$ pip3 install torchvision
+Collecting torchvision
+  Downloading torchvision-0.7.0-cp37-cp37m-manylinux1_x86_64.whl (5.9 MB)
+     |████████████████████████████████| 5.9 MB 4.4 MB/s
+Collecting torch==1.6.0
+  Downloading torch-1.6.0-cp37-cp37m-manylinux1_x86_64.whl (748.8 MB)
+     |████████████████████████████████| 748.8 MB 33 kB/s
+Requirement already satisfied: numpy in ./anaconda3/envs/pytorch/lib/python3.7/site-packages (from torchvision) (1.19.2)
+Collecting pillow&gt;=4.1.1
+  Using cached Pillow-7.2.0-cp37-cp37m-manylinux1_x86_64.whl (2.2 MB)
+Requirement already satisfied: future in ./anaconda3/envs/pytorch/lib/python3.7/site-packages (from torch==1.6.0-&gt;torchvision) (0.18.2)
+Installing collected packages: torch, pillow, torchvision
+  Attempting uninstall: torch
+    Found existing installation: torch 1.5.0
+    Uninstalling torch-1.5.0:
+      Successfully uninstalled torch-1.5.0
+Successfully installed pillow-7.2.0 torch-1.6.0 torchvision-0.7.0
+(pytorch) <font color="#8AE234"><b>akira@Akira</b></font>:<font color="#729FCF"><b>~</b></font>$ pip3 unstall torch
+ERROR: unknown command &quot;unstall&quot; - maybe you meant &quot;uninstall&quot;
+(pytorch) <font color="#8AE234"><b>akira@Akira</b></font>:<font color="#729FCF"><b>~</b></font>$ pip3 uninstall torch
+Found existing installation: torch 1.6.0
+Uninstalling torch-1.6.0:
+  Would remove:
+    /home/akira/anaconda3/envs/pytorch/bin/convert-caffe2-to-onnx
+    /home/akira/anaconda3/envs/pytorch/bin/convert-onnx-to-caffe2
+    /home/akira/anaconda3/envs/pytorch/lib/python3.7/site-packages/caffe2/*
+    /home/akira/anaconda3/envs/pytorch/lib/python3.7/site-packages/torch-1.6.0.dist-info/*
+    /home/akira/anaconda3/envs/pytorch/lib/python3.7/site-packages/torch/*
+Proceed (y/n)? y
+  Successfully uninstalled torch-1.6.0
+(pytorch) <font color="#8AE234"><b>akira@Akira</b></font>:<font color="#729FCF"><b>~</b></font>$ pip3 install torch==1.5
+Collecting torch==1.5
+  Using cached torch-1.5.0-cp37-cp37m-manylinux1_x86_64.whl (752.0 MB)
+Requirement already satisfied: future in ./anaconda3/envs/pytorch/lib/python3.7/site-packages (from torch==1.5) (0.18.2)
+Requirement already satisfied: numpy in ./anaconda3/envs/pytorch/lib/python3.7/site-packages (from torch==1.5) (1.19.2)
+Installing collected packages: torch
+<font color="#CC0000">ERROR: After October 2020 you may experience errors when installing or updating packages. This is because pip will change the way that it resolves dependency conflicts.</font>
+
+<font color="#CC0000">We recommend you use --use-feature=2020-resolver to test your packages with the new resolver before it becomes the default.</font>
+
+<font color="#CC0000">torchvision 0.7.0 requires torch==1.6.0, but you&apos;ll have torch 1.5.0 which is incompatible.</font>
+Successfully installed torch-1.5.0
+(pytorch) <font color="#8AE234"><b>akira@Akira</b></font>:<font color="#729FCF"><b>~</b></font>$ pip3 uninstall torchvision
+Found existing installation: torchvision 0.7.0
+Uninstalling torchvision-0.7.0:
+  Would remove:
+    /home/akira/anaconda3/envs/pytorch/lib/python3.7/site-packages/torchvision-0.7.0.dist-info/*
+    /home/akira/anaconda3/envs/pytorch/lib/python3.7/site-packages/torchvision/*
+Proceed (y/n)? y
+  Successfully uninstalled torchvision-0.7.0
+(pytorch) <font color="#8AE234"><b>akira@Akira</b></font>:<font color="#729FCF"><b>~</b></font>$ pip3 install torchvision==0.6
+Collecting torchvision==0.6
+  Downloading torchvision-0.6.0-cp37-cp37m-manylinux1_x86_64.whl (6.6 MB)
+     |████████████████████████████████| 6.6 MB 6.1 MB/s
+Requirement already satisfied: numpy in ./anaconda3/envs/pytorch/lib/python3.7/site-packages (from torchvision==0.6) (1.19.2)
+Requirement already satisfied: torch==1.5.0 in ./anaconda3/envs/pytorch/lib/python3.7/site-packages (from torchvision==0.6) (1.5.0)
+Requirement already satisfied: pillow&gt;=4.1.1 in ./anaconda3/envs/pytorch/lib/python3.7/site-packages (from torchvision==0.6) (7.2.0)
+Requirement already satisfied: future in ./anaconda3/envs/pytorch/lib/python3.7/site-packages (from torch==1.5.0-&gt;torchvision==0.6) (0.18.2)
+Installing collected packages: torchvision
+Successfully installed torchvision-0.6.0
+</pre>
