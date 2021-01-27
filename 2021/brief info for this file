@@ -15,8 +15,8 @@ https://github.com/zhanghang1989/ResNeSt
 5. DensePoint: （初期看的一篇有启发性为文章）
 https://github.com/Yochengliu/DensePoint
 
-6. Point Transformer: （2D上的，将Transformer用在图中）
+6. Point Transformer: （2020.12.16 牛津 港大）
 https://github.com/lucidrains/point-transformer-pytorch
 
-7. PCT: Point Cloud Transformer: （真Attention is all you need）
+7. PCT: Point Cloud Transformer: （2020.12.17 清华）
 https://github.com/uyzhang/PCT_Pytorch
