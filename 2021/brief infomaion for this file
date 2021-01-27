@@ -1,0 +1,22 @@
+Useful projects on GitHub
+
+1. Going deeper with Point Networks: （模块化程度高）
+https://github.com/erictuanle/GoingDeeperwPointNetworks
+
+2. Dynamic Graph CNN for Learning on Point Clouds: 
+https://github.com/AnTao97/dgcnn.pytorch
+
+3. Graph Attention Networks: （2018年的比较早期的图注意力网络）
+https://github.com/PetarV-/GAT
+
+4. ResNeSt Split-Attention Networks: （2D上的工作，具有参考价值）
+https://github.com/zhanghang1989/ResNeSt
+
+5. DensePoint: （初期看的一篇有启发性为文章）
+https://github.com/Yochengliu/DensePoint
+
+6. Point Transformer: （2D上的，将Transformer用在图中）
+https://github.com/lucidrains/point-transformer-pytorch
+
+7. PCT: Point Cloud Transformer: （真Attention is all you need）
+https://github.com/uyzhang/PCT_Pytorch
