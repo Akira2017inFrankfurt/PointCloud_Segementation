@@ -1,0 +1,37 @@
+***************************************
+整个项目的框架是：
+byol_pcl
+---data
+	---modelnet40_normal_resampled
+		---airplane
+		---bathtub
+		...
+---lightling_logs(lightling自动生成)
+---model
+	---__init___.py
+	---byol_pcl.py
+	---dataset.py
+	---encoder.py
+	---utils.py
+	---utils_classes.py
+---train.py
+
+***************************************
+配置：
+python 3.7
+torch 1.9.0
+torchvision 0.9
+pytorch-lightning 0.7.1
+
+***************************************
+运行：
+1. 根据配置选择合适的环境；
+2. 根据项目框架创建工程文件夹，设置空data文件夹，以及将model文件夹和train.py导入；
+3. 根据链接下载数据集到本地，解压到data文件夹职中；https://shapenet.cs.stanford.edu/media/modelnet40_normal_resampled.zip
+4. 在train.py中第35行的NUM_GPUS将其从1改成合适的数目，比如8，下面3个也都是在train.py中修改；
+5. 31行 BATCH_SIZE可以酌情增大；
+6. 33行，EPOCHS也可以增大；
+5. 40行，文件地址需要修改；
+7. 运行train.py即可
+
+
